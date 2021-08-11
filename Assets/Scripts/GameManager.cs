@@ -64,6 +64,18 @@ public class SpinResult
 
 public class GameManager : MonoBehaviour
 {
-   
+    public List<SpinResult> SpinResults = new List<SpinResult>
+    {
+        new SpinResult(new List<float>{CoinType.A, CoinType.Wild, CoinType.Bonus }, 13, Mathf.CeilToInt(100f/13f)),
+        new SpinResult(new List<float>{CoinType.Wild, CoinType.Wild, CoinType.Seven }, 13, Mathf.CeilToInt(100f/13f)),
+        new SpinResult(new List<float>{CoinType.Jackpot, CoinType.Jackpot, CoinType.A }, 13, Mathf.CeilToInt(100f/13f)),
+        new SpinResult(new List<float>{CoinType.Wild, CoinType.Bonus, CoinType.A }, 13, Mathf.CeilToInt(100f/13f)),
+        new SpinResult(new List<float>{CoinType.Bonus, CoinType.A, CoinType.Jackpot }, 13, Mathf.CeilToInt(100f/13f)),
+        new SpinResult(new List<float>{CoinType.A, CoinType.A, CoinType.A }, 9, Mathf.CeilToInt(100f/9f), 5f),
+        new SpinResult(new List<float>{CoinType.Bonus, CoinType.Bonus, CoinType.Bonus }, 8, Mathf.CeilToInt(100f/8f), 10f),
+        new SpinResult(new List<float>{CoinType.Seven, CoinType.Seven, CoinType.Seven }, 7, Mathf.CeilToInt(100f/7f), 20f),
+        new SpinResult(new List<float>{CoinType.Wild, CoinType.Wild, CoinType.Wild }, 6, Mathf.CeilToInt(100f/6f), 28f),
+        new SpinResult(new List<float>{CoinType.Jackpot, CoinType.Jackpot, CoinType.Jackpot }, 5, Mathf.CeilToInt(100f/5f), 40f),
+    };
 
 }
