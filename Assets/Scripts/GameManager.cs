@@ -78,4 +78,18 @@ public class GameManager : MonoBehaviour
         new SpinResult(new List<float>{CoinType.Jackpot, CoinType.Jackpot, CoinType.Jackpot }, 5, Mathf.CeilToInt(100f/5f), 40f),
     };
 
+
+    //Round Number and Coins
+    public Dictionary<int, SpinResult> Rounds = new Dictionary<int, SpinResult>();
+
+    private int currentRound = 0;
+
+    // SlotId and Status
+    public Dictionary<int, SlotStatus> Slots = new Dictionary<int, SlotStatus>();
+
+    public List<GameObject> Rows = new List<GameObject>();
+
+   
 }
+
+
