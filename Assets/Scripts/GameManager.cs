@@ -88,8 +88,17 @@ public class GameManager : MonoBehaviour
     public Dictionary<int, SlotStatus> Slots = new Dictionary<int, SlotStatus>();
 
     public List<GameObject> Rows = new List<GameObject>();
+    public static event Action<SpinResult> SpinEvent;
 
+    public static event Action<List<float>> LoadData;
+
+    public GameObject RoundIndicatorUI;
+    public GameObject BingoParticle;
+
+    private bool ShowBingoAnim = false;
+    private float BingoMagnitude;
    
+    }
 }
 
 
