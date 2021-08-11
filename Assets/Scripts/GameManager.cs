@@ -234,7 +234,88 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void ShowLogs()
+    {
+   
+        Debug.Log($"Total Round Count: {Rounds.Count}");
+        Debug.Log($"Unique Round Count: {Rounds.Distinct().Count()}");
+        Debug.Log($"Round List: {String.Join(",", Rounds.Keys)}");
+        Debug.Log("-------");
+        Debug.Log("Round Distribution:");
 
+      
+        Debug.Log("-------");
+        Debug.Log("Result Block Intervals:");
+
+        for (int i = 0; i < SpinResults.Count; i++)
+        {
+            string RoundList= "";
+            int NumberOfRounds = 0;
+            foreach (var item in Rounds.Keys)
+            {
+                if (SpinResults[i] == Rounds[item])
+                {
+                    RoundList += $"{item},";
+                    NumberOfRounds++;
+                }
+            }
+            Debug.Log($"---------Log{i+1}-----------");
+
+            string CoinNames = "";
+            foreach (var item in SpinResults[i].CoinPositions)
+            {
+                CoinNames += $"{ GetCoinName(item) }, ";
+            }
+            Debug.Log($"Coins: {CoinNames} Probability: {SpinResults[i].SpinProbability}");
+            Debug.Log($"Coin Rounds: {RoundList} -Coin Round Count: {NumberOfRounds}");
+
+            int LeftValue = 0;
+            string CoinIntervals = "";
+            for (int j = 0; j < SpinResults[i].SpinProbability; j++)
+            {
+                int RightValue = LeftValue + SpinResults[i].BlockIntervals[j] - 1;
+
+                CoinIntervals += $"[{LeftValue} - {RightValue}],";
+
+                LeftValue = RightValue + 1;
+            }
+
+            Debug.Log($"Coin Block Intervals: {CoinIntervals}");
+            //Debug.Log($"---------Log{i}-----------");
+
+        }
+
+       
+
+
+    }
+    public void LoadPreviousState()
+    {
+        LoadData?.Invoke(Rounds[currentRound - 1].CoinPositions);
+        RoundIndicatorUI.GetComponent<TextMeshProUGUI>().text = $"Round: {currentRound}";
+    }
+
+    public void ResetGameState()
+    {
+        currentRound = 0;
+        RoundIndicatorUI.GetComponent<TextMeshProUGUI>().text = $"Round: {currentRound}";
+        CreateRounds();
+        ShowLogs();
+    }
+
+    public string GetCoinName(float coinPosition)
+    {
+        Dictionary<float, string> Coins = new Dictionary<float, string>(){
+            { CoinType.A, nameof(CoinType.A) },
+            { CoinType.Bonus, nameof(CoinType.Bonus) },
+            { CoinType.Jackpot, nameof(CoinType.Jackpot) },
+            { CoinType.Wild, nameof(CoinType.Wild) },
+            { CoinType.Seven, nameof(CoinType.Seven) },
+
+        };
+        return Coins[coinPosition];
+
+    }
 }
 
 
